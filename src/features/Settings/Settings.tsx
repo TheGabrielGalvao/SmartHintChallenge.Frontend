@@ -5,9 +5,13 @@ import { useEffect, useState } from "react";
 import { SettingsModel } from "../../models/Settings.mode";
 import SettingsService from "../../services/SettingsService";
 import { useQuery, useQueryClient } from "react-query";
+import { toastyPreset } from "../../utils/helper/toastyHelper";
+import { MSG_SUCCESS } from "../../utils/helper/msgHelper";
+import { useLayout } from "../../context/LayoutProvider";
 
 export const Settings = () => {
     const queryClient = useQueryClient();
+    const { handleSetToast } = useLayout();
     const [settingsState, setSettingsState] = useState<SettingsModel>(new SettingsModel())
 
     const { data: settings } = useQuery(
@@ -30,6 +34,10 @@ export const Settings = () => {
     const handleSaveSettings = async () => {
         await SettingsService.saveSettings(settingsState);
         queryClient.invalidateQueries(['list-settings'])
+        handleSetToast({
+            ...toastyPreset.SUCCESS,
+            message: MSG_SUCCESS
+        });
     }
 
 
