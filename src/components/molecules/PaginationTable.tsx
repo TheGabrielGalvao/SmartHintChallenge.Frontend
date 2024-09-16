@@ -39,7 +39,7 @@ export const PaginationTable = ({
                     columns={columns}
                     actions={actions}
                 />
-                {data.length > 6 && <div className="flex flex-1 justify-end">
+                {data.length > 5 && <div className="flex flex-1 justify-end">
                     <DefaultPagination handlePageSizeChange={handlePageSizeChange} itemsPerPage={pageSize} totalPages={Math.ceil(data.length / pageSize)} currentPage={currentPage} onPageChange={handlePageChange} />
                 </div>}
             </div>

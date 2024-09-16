@@ -37,7 +37,7 @@ export function DefaultPagination({
                 </TextElement>
                 <div className="flex gap-2">
                     <ButtonElement
-                        className="flex items-center gap-2 text-primary py-sm border-primary outline"
+                        className="flex items-center gap-2 text-primary border-primary outline"
                         onClick={prev}
                         disabled={currentPage === 1}
                     >
@@ -65,7 +65,7 @@ export function DefaultPagination({
                         </SelectInputElement.Root>
                     </div>
                     <ButtonElement
-                        className="flex items-center gap-2 text-primary py-sm border-primary outline"
+                        className="flex items-center gap-2 text-primary border-primary outline"
                         onClick={next}
                         disabled={currentPage === totalPages}
                     >
