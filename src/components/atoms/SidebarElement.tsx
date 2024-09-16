@@ -5,6 +5,7 @@ import { PiCaretRight } from "react-icons/pi";
 import { TbHexagonLetterZ } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
 import { tm } from "../../utils/helper/tailwindHelper";
+import { TextElement } from "./TextElement";
 
 interface SidebarElementProps {
     open?: boolean
@@ -39,29 +40,29 @@ export const SidebarElement = ({ children }: SidebarElementProps) => {
                 <SidebarSection open={open}>
                     <SidebarSectionItem open={open}>
                         <>
-                            <span
+                            <TextElement
                                 className={tm("cursor-pointer duration-500  ", {
                                     "rotate-[360deg] bg-transparent text-primary": open,
                                     "text-menuTextActive": !open,
                                 })}
                             >
-                                <TbHexagonLetterZ size={32} />
+                                <TbHexagonLetterZ size={24} />
 
-                            </span>
-                            <span className={tm(
+                            </TextElement>
+                            <TextElement className={tm(
                                 "text-title origin-left text-sm duration-200 bg-transparent font-semibold",
                                 {
                                     "scale-0 ": !open,
                                     "hover:text-title/80": open,
                                 }
-                            )}>Teste
-                            </span>
+                            )}>SmartHint
+                            </TextElement>
                         </>
                     </SidebarSectionItem>
                 </SidebarSection>
                 <SidebarSection open={open}>
-                    <SidebarSectionItem open={open} label="Clientes" route="/customer" icon={<FaAddressBook size={32} />} />
-                    <SidebarSectionItem open={open} label="Ajustes" route="/settings" icon={<FaGear size={32} />} />
+                    <SidebarSectionItem open={open} label="Clientes" route="/customer" icon={<FaAddressBook size={24} />} />
+                    <SidebarSectionItem open={open} label="Ajustes" route="/settings" icon={<FaGear size={24} />} />
                 </SidebarSection>
                 <SidebarSection open={open}>
 
@@ -75,7 +76,7 @@ export const SidebarElement = ({ children }: SidebarElementProps) => {
 
 const SidebarSection = ({ children }: SidebarElementProps) => {
     return (
-        <ul className="flex flex-col w-full items-center">
+        <ul className="flex flex-col flex-1 w-full items-center">
             {children}
         </ul>
     )
@@ -96,7 +97,7 @@ const SidebarSectionItem = ({ children, open, icon, label, route, exact = true }
                     to={menuItem?.route || ""}
                     end={menuItem?.exact}
                     className={({ isActive, isPending }) =>
-                        tm("flex w-full items-center p-3 rounded-lg", {
+                        tm("flex w-full items-center p-sm rounded-lg", {
                             "justify-center": !open,
                             "justify-start gap-4": open,
                             "text-primary bg-primary/10": isActive,
@@ -106,26 +107,26 @@ const SidebarSectionItem = ({ children, open, icon, label, route, exact = true }
                 >
                     <>
                         {menuItem?.icon}
-                        <span
+                        <TextElement
                             className={tm("origin-left duration-200 text-inherit", {
                                 hidden: !open,
                                 block: open,
                             })}
                         >
                             {menuItem?.label}
-                        </span>
+                        </TextElement>
                     </>
                 </NavLink>
                 : <>
                     {icon}
-                    <span
+                    <TextElement
                         className={tm("origin-left duration-200", {
                             hidden: !open,
                             block: open,
                         })}
                     >
                         {label}
-                    </span>
+                    </TextElement>
                 </>
         )
     }
@@ -133,7 +134,7 @@ const SidebarSectionItem = ({ children, open, icon, label, route, exact = true }
     return (
         <li
             className={tm(
-                "flex items-center w-full text-menuText hover:text-primary hover:bg-primary/10 hover:text-menuTextActtive transition-all duration-300 cursor-pointer p-3 rounded-lg",
+                "flex items-center w-full text-menuText hover:text-primary hover:bg-primary/10 hover:text-menuTextActtive transition-all duration-300 cursor-pointer  rounded-lg",
                 {
                     "justify-center": !open,
                     "justify-start gap-4": open,

@@ -1,8 +1,9 @@
 import { BrowserRouter } from 'react-router-dom'
 import './styles/global.css'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AppRoutes } from './config/AppRoutes';
 import { RootLayout } from './components/templates/RootLayout';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { LayoutProvider } from './context/LayoutProvider';
 
 function App() {
   const queryClient = new QueryClient();
@@ -10,9 +11,9 @@ function App() {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <RootLayout>
+        <LayoutProvider>
           <AppRoutes />
-        </RootLayout>
+        </LayoutProvider>
       </QueryClientProvider>
     </BrowserRouter>
   )

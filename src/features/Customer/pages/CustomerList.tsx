@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { Column } from "../../../components/atoms/BasicTable";
 import { ButtonElement } from "../../../components/atoms/ButtonElement"
 import { TextElement } from "../../../components/atoms/TextElement";
@@ -11,6 +10,7 @@ import { OptionItem } from "../../../utils/types/Option";
 import CustomerService from "../../../services/CustomerService";
 import { PiPencilSimple, PiTrash } from "react-icons/pi";
 import { useNavigate } from "react-router";
+import { useQuery } from "react-query";
 
 
 const StatusBody = (row: any) => {
@@ -39,7 +39,13 @@ export const CustomerList = () => {
     const navigate = useNavigate();
 
     const { data: customers } = useQuery(
-        { queryKey: ["list-customers"], queryFn: () => CustomerService.getAll() }
+        ["list-customers"],
+        () => CustomerService.getAll(),
+        {
+            retry: false,
+            enabled: true
+        }
+
     );
 
     const columnList: Column[] = [
@@ -98,11 +104,6 @@ export const CustomerList = () => {
 
                                         )
                                     }
-                                />
-                                <PiTrash
-                                    size={25}
-                                    className="cursor-pointer text-danger"
-                                // onClick={() => deleteFunction(item.uuid)}
                                 />
                             </div>
 

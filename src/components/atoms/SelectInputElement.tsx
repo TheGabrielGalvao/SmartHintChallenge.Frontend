@@ -11,13 +11,22 @@ import {
     useState,
 } from "react";
 import { OptionItem } from "../../utils/types/Option";
+import { tm } from "../../utils/helper/tailwindHelper";
 
-export interface SelectInputRootElementProps {
+export interface SelectInputRootElementProps extends SelectHTMLAttributes<HTMLSelectElement> {
     children: ReactNode;
 }
 
-const SelectInputRoot = ({ children }: SelectInputRootElementProps) => (
-    <div className="flex items-center gap-3 h-12 rounded border border-blue-100 w-full focus-within:ring-2 ring-cyan-300">
+const SelectInputRoot = ({ children, disabled }: SelectInputRootElementProps) => (
+    <div className={
+        tm(
+            {
+                "bg-transparent": !disabled,
+                "bg-gray-300": disabled,
+            },
+            "flex items-center gap-3 py-2  h-xl rounded border-2 disabled:border-subtitle border-light w-full focus-within:ring-2 ring-primary"
+        )
+    }>
         {children}
     </div>
 );
@@ -44,7 +53,7 @@ const SelectInputInput = ({
 
     return (
         <select
-            className="w-full h-full pl-2 py-4 rounded-lg border-none border-0 outline-0 outline-none bg-transparent flex-1 text-gray-600 text-xs placeholder:text-gray-300"
+            className="w-full h-full pl-2  rounded-lg border-none border-0 outline-0 outline-none bg-transparent flex-1 text-gray-600 text-xs placeholder:text-gray-300"
             {...props}
             {...props.register}
             onChange={onChange}

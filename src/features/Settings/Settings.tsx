@@ -1,18 +1,18 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ButtonElement } from "../../components/atoms/ButtonElement"
 import { TextElement } from "../../components/atoms/TextElement"
-import CustomerService from "../../services/CustomerService";
 import { CheckboxElement } from "../../components/atoms/CheckboxElement";
 import { useEffect, useState } from "react";
 import { SettingsModel } from "../../models/Settings.mode";
 import SettingsService from "../../services/SettingsService";
+import { useQuery, useQueryClient } from "react-query";
 
 export const Settings = () => {
     const queryClient = useQueryClient();
     const [settingsState, setSettingsState] = useState<SettingsModel>(new SettingsModel())
 
     const { data: settings } = useQuery(
-        { queryKey: ["list-settings"], queryFn: () => SettingsService.getSettings() }
+        ["list-settings"],
+        () => SettingsService.getSettings()
     );
 
     useEffect(() => {
@@ -29,10 +29,7 @@ export const Settings = () => {
 
     const handleSaveSettings = async () => {
         await SettingsService.saveSettings(settingsState);
-        queryClient.invalidateQueries({
-            queryKey: ['list-settings'],
-            refetchType: 'active',
-        })
+        queryClient.invalidateQueries(['list-settings'])
     }
 
 

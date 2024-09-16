@@ -2,19 +2,24 @@ export class CustomerModel {
     uuid?: string
     name: string
     email: string
+    phone: string
     type: ECustomerType
     createdAt: string
+    cpfCnpj: string
     stateRegistration?: string
     free: boolean
-    birthday?: Date
+    birthday?: string
     gender?: EGender
     password?: string
+    confirmPassword?: string
     status: ECustomerStatus
 
     constructor() {
+        this.cpfCnpj = ""
+        this.phone = ""
         this.status = ECustomerStatus.Ativo
         this.name = ""
-        this.free = true
+        this.free = false
         this.email = ""
         this.type = ECustomerType["Pessoa Física"]
         this.createdAt = ""
